@@ -125,7 +125,6 @@ export class ManageEmployeeComponent {
   }
 
 
-
   generateReport() {
     this.http.get(`${this.API_URL}/report`, { responseType: 'blob' }).subscribe({
       next: (blob) => {

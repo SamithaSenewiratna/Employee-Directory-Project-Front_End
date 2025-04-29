@@ -1,14 +1,17 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
       <h3 class="text-center mb-4">Login to Your Account</h3>
-      <form>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">Name </label>
           <input
-            type="email"
+            type="name"
             class="form-control"
             id="email"
-            placeholder="Enter your email"
+            name="username"
+            [(ngModel)]="username"
+            placeholder="Enter your name"
+            required
           />
         </div>
         <div class="mb-3">
@@ -17,14 +20,17 @@
             type="password"
             class="form-control"
             id="password"
+            name="password"
+            [(ngModel)]="password"
             placeholder="Enter your password"
+            required
           />
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="rememberMe" />
           <label class="form-check-label" for="rememberMe">Remember me</label>
         </div>
-        <button routerLink="/manage-Enployee" type="submit" class="btn btn-primary w-100">Login</button>
+        <button  (ngSubmit)="login()"  routerLink="/manage-Enployee" type="submit" class="btn btn-primary w-100">Login</button>
       </form>
       <div class="text-center mt-3">
         <a href="#">Forgot password?</a>
