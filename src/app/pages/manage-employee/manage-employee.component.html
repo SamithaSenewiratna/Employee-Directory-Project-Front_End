@@ -4,34 +4,37 @@
       <h2 class="text-center mb-4">Employee Management</h2>
   
      
-      <form  class="row g-3">
+      <form class="row g-3" (ngSubmit)="addEmployee()">
         <div class="col-md-6">
-          <input  name="name" type="text" class="form-control" placeholder="Name" required>
+          <input [(ngModel)]="newEmployee.name" name="name" type="text" class="form-control" placeholder="Name" required>
         </div>
         <div class="col-md-6">
-          <input  name="email" type="text" class="form-control" placeholder="email" required>
+          <input [(ngModel)]="newEmployee.email" name="email" type="email" class="form-control" placeholder="Email" required>
         </div>
         <div class="col-md-4">
-          <input  name="Department" type="number" class="form-control" placeholder="Department" required>
-        </div>
-       
-       
+            <select [(ngModel)]="newEmployee.department" name="department" class="form-control" required>
+              <option value="" disabled selected>Select Department</option>
+              <option value="HR">HR</option>
+              <option value="IT">IT</option>
+              <option value="Finance">Finance</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Operations">Operations</option>
+            </select>
+          </div>
+          
         <div class="col-md-4 d-flex gap-2">
-          <button type="submit" class="btn btn-success flex-grow-1">Add</button>
-          <button type="button"  class="btn btn-warning flex-grow-1">Update</button>
+          <button type="button" (click)="addEmployee()" class="btn btn-success flex-grow-1">Add</button>
+          <button type="button" (click)="updateEmployee()" class="btn btn-warning flex-grow-1">Update</button>
         </div>
       </form>
   
-
       <div class="row mt-4">
+       
         <div class="col-md-5">
-          <input  name="searchId" type="number" class="form-control" placeholder="Search by ID">
-        </div>
-        <div class="col-md-5">
-          <input  name="searchName" type="text" class="form-control" placeholder="Search by Name">
+          <input [(ngModel)]="searchName" name="searchName" type="text" class="form-control" placeholder="Search by Name">
         </div>
         <div class="col-md-2 d-grid">
-          <button  type="button" class="btn btn-primary">Search</button>
+          <button type="button" (click)="searchEmployee()" class="btn btn-primary">Search</button>
         </div>
       </div>
   
@@ -49,23 +52,26 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let employee of employees">
+              <td>{{employee.id}}</td>
+              <td>{{employee.name}}</td>
+              <td>{{employee.email}}</td>
+              <td>{{employee.department}}</td>
+              <td>{{employee.created_at}}</td>
+              <td>{{employee.updated_at}}</td> 
               <td>
                 <div class="d-flex gap-2">
-                  <button  type="button" class="btn btn-info btn-sm">Edit</button>
-                  <button  type="button" class="btn btn-danger btn-sm">Delete</button>
+                    <button (click)="selectEmployee(employee)" type="button" class="btn btn-info btn-sm">Edit</button>
+                    <button (click)="deleteEmployee(employee.id!)" type="button" class="btn btn-danger btn-sm">Delete</button>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
+
       </div>
-  
+        <button class="btn btn-secondary mt-2" (click)="generateReport()">Download Report</button>
+
     </div>
   </div>
   
